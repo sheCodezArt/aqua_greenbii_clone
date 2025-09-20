@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login • AquaGlass</title>
+  <style>
+    :root {
+      --aqua:#00d1d1;
+      --aqua-2:#00bfbd;
+      --black:#0b0b0f;
+      --muted:#9aa3a8;
+      --glass: rgba(255,255,255,0.04);
+      --card: rgba(255,255,255,0.02);
+      --glass-2: rgba(0,0,0,0.35);
+      --radius:14px;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+    }
+
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--black), var(--glass-2));
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .login-card {
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 320px;
+      text-align: center;
+      animation: slideIn 1s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: var(--aqua);
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.6rem 0;
+      border-radius: var(--radius);
+      border: none;
+      background: var(--card);
+      color: white;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border: 1px solid var(--aqua);
+      background: var(--glass-2);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      background: var(--aqua);
+      color: var(--black);
+      font-weight: bold;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: var(--aqua-2);
+      transform: scale(1.05);
+    }
+
+    .footer-text {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <!--<form id="loginForm">
+      <input type="text" id="username" placeholder="Enter your name" required>
+      <button type="submit">Login</button>
+    </form>-->
+    <form id="loginForm">
+  <input type="text" id="username" placeholder="Enter your name" required>
+  <input type="password" id="password" placeholder="Enter your password" required>
+  <button type="submit">Login</button>
+</form>
+<p class="footer-text">Don’t have an account? <a href="sign-up.html">Sign Up</a></p>
+    <p class="footer-text">Powered by AquaGlass</p>
+  </div>
+
+  <!--<script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      if(username) {
+        localStorage.setItem("username", username);
+        window.location.href = "greet.html";
+      }
+    });
+  </script>-->
+  
+  <script>
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const storedPass = localStorage.getItem("user_" + username);
+
+    if(storedPass && storedPass === password) {
+      localStorage.setItem("username", username);
+      window.location.href = "greet.html";
+    } else {
+      alert("Invalid credentials. Try again or Sign Up.");
+    }
+  });
+</script>
+</body>
+</html>

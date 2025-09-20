@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeting • AquaGlass</title>
+  <style>
+    :root {
+      --aqua:#00d1d1;
+      --aqua-2:#00bfbd;
+      --black:#0b0b0f;
+      --muted:#9aa3a8;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(0,0,0,0.35);
+      --radius:14px;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--black), var(--glass-2));
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .greet-card {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      padding: 2rem 3rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--aqua);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8);}
+      to { opacity: 1; transform: scale(1);}
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--aqua);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--black);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: var(--aqua-2);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="greet-card">
+    <h1 id="greeting"></h1>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const username = localStorage.getItem("username");
+    const greetingEl = document.getElementById("greeting");
+
+    if(username) {
+      greetingEl.textContent = `Hello, ${username}! 👋`;
+    } else {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("username");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

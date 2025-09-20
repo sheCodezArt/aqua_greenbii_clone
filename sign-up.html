@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up • AquaGlass</title>
+  <style>
+    :root {
+      --aqua:#00d1d1;
+      --aqua-2:#00bfbd;
+      --black:#0b0b0f;
+      --muted:#9aa3a8;
+      --glass: rgba(255,255,255,0.04);
+      --card: rgba(255,255,255,0.02);
+      --glass-2: rgba(0,0,0,0.35);
+      --radius:14px;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, var(--black), var(--glass-2));
+      height: 100vh; display: flex; justify-content: center; align-items: center;
+      color: white; overflow: hidden;
+    }
+
+    .signup-card {
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 340px;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(50px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    h2 { margin-bottom: 1rem; color: var(--aqua); }
+
+    input {
+      width: 100%; padding: 0.8rem; margin: 0.6rem 0;
+      border-radius: var(--radius); border: none;
+      background: var(--card); color: white; outline: none;
+      transition: 0.3s;
+    }
+    input:focus { border: 1px solid var(--aqua); background: var(--glass-2); }
+
+    button {
+      width: 100%; padding: 0.8rem; margin-top: 1rem;
+      background: var(--aqua); color: var(--black); font-weight: bold;
+      border: none; border-radius: var(--radius); cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: var(--aqua-2); transform: scale(1.05); }
+
+    .footer-text { margin-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+    a { color: var(--aqua); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="signup-card">
+    <h2>Create Account</h2>
+    <form id="signupForm">
+      <input type="text" id="newUser" placeholder="Enter username" required>
+      <input type="password" id="newPass" placeholder="Enter password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p class="footer-text">Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const user = document.getElementById("newUser").value.trim();
+      const pass = document.getElementById("newPass").value.trim();
+
+      if(user && pass) {
+        // Save to localStorage
+        localStorage.setItem("user_" + user, pass);
+        alert("Account created successfully! You can now log in.");
+        window.location.href = "index.html";
+      } else {
+        alert("Please fill out all fields.");
+      }
+    });
+  </script>
+</body>
+</html>
